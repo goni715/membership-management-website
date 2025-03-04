@@ -35,6 +35,7 @@ const Login = () => {
             Sign in
           </button>
         </Form>
+        <p className="text-center mt-5">Don't have an account? <Link to={'/register'} className="text-[#22A59A]">Sign up</Link></p>
       </div>
     </div>
   );
