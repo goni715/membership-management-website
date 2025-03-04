@@ -1,6 +1,7 @@
 import React from 'react'
 import Hero from '../../Components/Hero/Hero'
 import WhyChooseUs from '../../Components/WhyChooseUs/WhyChooseUs'
+import StepEarn from '../../Components/StepEarn/StepEarn'
 
 const HomePage = () => {
   return (
@@ -8,6 +9,7 @@ const HomePage = () => {
         <div className='container mx-auto'>
             <Hero/>
             <WhyChooseUs/>
+            <StepEarn/>
         </div>
     </div>
   )
