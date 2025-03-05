@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "../../assets/images/logo.png";
 import { FaFacebookF, FaInstagramSquare, FaLinkedinIn, FaTwitter, FaYoutube } from "react-icons/fa";
+import { Link } from "react-router";
 const Footer = () => {
   return (
     <div>
@@ -11,8 +12,8 @@ const Footer = () => {
             <p className="text-xl">AVANTRA</p>
           </div>
           <div className="flex items-center gap-4">
-            <p>Terms & Conditions</p>
-            <p>Privacy Policy</p>
+            <Link to={'/terms-conditions'}>Terms & Conditions</Link>
+            <Link to={'/privacy-policy'}>Privacy Policy</Link>
             <FaFacebookF size={22} />
             <FaTwitter size={22} />
             <FaInstagramSquare size={22} />
