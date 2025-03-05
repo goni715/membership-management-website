@@ -16,7 +16,7 @@ const MyAccount = () => {
 
       {/* Profile  */}
 
-      <div className="grid grid-cols-12 gap-10 mt-10">
+      <div className="grid grid-cols-12 gap-10 mt-10 ">
         <div className="col-span-3 bg-[#0D0D0D] p-10">
           <p className="text-2xl font-bold pb-5">Manage Account</p>
           <div className="space-y-5">
