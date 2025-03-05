@@ -7,7 +7,7 @@ function App() {
   return (
     <div>
       <NavBar />
-      <div className="min-h-[70vh]">
+      <div className="min-h-[70vh] bg-[#090909]">
         <Outlet />
       </div>
       <Footer/>

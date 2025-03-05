@@ -17,7 +17,7 @@ const NavBar = () => {
                     <NavLink>Home</NavLink>
                     <NavLink>Videos</NavLink>
                     <NavLink>Files</NavLink>
-                    <NavLink>Contact Us</NavLink>
+                    <NavLink to={'/contact-us'}>Contact Us</NavLink>
                     <button className='bg-[#22A59A] px-4 py-2 rounded-sm shadow-2xl'>Log in</button>
                 </div>
             </div>
