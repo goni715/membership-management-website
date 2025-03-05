@@ -1,5 +1,6 @@
 import React from 'react'
 import logo from '../../assets/images/logo.png'
+import profile from '../../assets/images/profile1.png'
 import { NavLink } from 'react-router'
 import { IoMdNotificationsOutline } from 'react-icons/io'
 const NavBar = () => {
@@ -20,6 +21,7 @@ const NavBar = () => {
                     <NavLink>Files</NavLink>
                     <NavLink to={'/contact-us'}>Contact Us</NavLink>
                     <NavLink to={'/notification'} className={"bg-white p-1.5 rounded-full"}><IoMdNotificationsOutline size={22} color='#22A59A' /></NavLink>
+                    <NavLink to={'/my-profile'}><img src={profile} className='h-10' alt="" /></NavLink>
                     <button className='bg-[#22A59A] px-4 py-2 rounded-sm shadow-2xl'>Log in</button>
                 </div>
             </div>

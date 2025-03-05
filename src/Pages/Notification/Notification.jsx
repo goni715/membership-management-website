@@ -2,7 +2,7 @@ import React from "react";
 
 const Notification = () => {
   return (
-    <div className="text-white container mx-auto">
+    <div className="text-white container mx-auto ">
       <p className="text-center text-4xl font-semibold pt-10">Notification</p>
       <p className="text-center mt-2 mb-20">Home / Notification</p>
 
