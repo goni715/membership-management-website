@@ -11,8 +11,8 @@ const MyAccount = () => {
   const [changeRoute, setChangeRoute] = useState("profile");
   return (
     <div className="text-white container mx-auto">
-      <p className="text-center text-4xl font-semibold pt-10">Contact Us</p>
-      <p className="text-center mt-2">Home/Contact Us</p>
+      <p className="text-center text-4xl font-semibold pt-10">My Account</p>
+      <p className="text-center mt-2">Home/My Account</p>
 
       {/* Profile  */}
 
