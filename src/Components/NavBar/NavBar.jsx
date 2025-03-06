@@ -17,7 +17,7 @@ const NavBar = () => {
                 {/* Menu bars */}
                 <div className='space-x-10 flex items-center'>
                     <NavLink>Home</NavLink>
-                    <NavLink>Videos</NavLink>
+                    <NavLink to={'/videos'}>Videos</NavLink>
                     <NavLink>Files</NavLink>
                     <NavLink to={'/contact-us'}>Contact Us</NavLink>
                     <NavLink to={'/notification'} className={"bg-white p-1.5 rounded-full"}><IoMdNotificationsOutline size={22} color='#22A59A' /></NavLink>
