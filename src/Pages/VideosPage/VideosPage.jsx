@@ -73,9 +73,29 @@ const VideosPage = () => {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 8,
+    slidesToShow: 5, 
     slidesToScroll: 1,
     arrows: true,
+    responsive: [
+      {
+        breakpoint: 1024, // Tablets
+        settings: {
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 768, // Mobile landscape
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 480, // Mobile portrait
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
   };
 
   const handleClick = (name) => {
@@ -106,7 +126,7 @@ const VideosPage = () => {
 
       <p className="mt-20">Showing 42 result</p>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 py-10">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 py-10 px-2 md:px-0">
         {
             videos?.map((video , i)=>{
                 return(
