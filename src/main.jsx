@@ -14,6 +14,7 @@ import MyAccount from "./Pages/MyAccount/MyAccount.jsx";
 import VideosPage from "./Pages/VideosPage/VideosPage.jsx";
 import FilesPage from "./Pages/FilesPage/FilesPage.jsx";
 import UpdateProfile from "./Pages/UpdateProfile/UpdateProfile.jsx";
+import ForgetPassword from "./Pages/ForgetPassword/ForgetPassword.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -33,6 +34,7 @@ createRoot(document.getElementById("root")).render(
         </Route>
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register/>} />
+        <Route path="/forget-password" element={<ForgetPassword/>} />
       </Routes>
     </BrowserRouter>
   </StrictMode>

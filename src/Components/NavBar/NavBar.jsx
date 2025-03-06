@@ -39,9 +39,9 @@ const NavBar = () => {
             <NavLink to={"/my-profile"}>
               <img src={profile} className="h-10" alt="" />
             </NavLink>
-            <button className="bg-[#22A59A] px-4 py-2 rounded-sm shadow-2xl">
-              Log in
-            </button>
+           <NavLink to={'/login'}> <button className="bg-[#22A59A] cursor-pointer px-4 py-2 rounded-sm shadow-2xl">
+              Log in 
+            </button></NavLink>
           </div>
 
           {/* Mobile Menu */}
