@@ -11,13 +11,13 @@ const MyAccount = () => {
   const [changeRoute, setChangeRoute] = useState("profile");
   return (
     <div className="text-white container mx-auto">
-      <p className="text-center text-4xl font-semibold pt-10">My Account</p>
+      <p className="text-center text-4xl font-semibold pt-10 ">My Account</p>
       <p className="text-center mt-2">Home/My Account</p>
 
       {/* Profile  */}
 
-      <div className="grid grid-cols-12 gap-10 mt-10 ">
-        <div className="col-span-3 bg-[#0D0D0D] p-10">
+      <div className="grid grid-cols-12 gap-10 mt-10 pb-10">
+        <div className="col-span-8 md:col-span-3 flex flex-col justify-center items-center ml-5 md:ml-0 bg-[#0D0D0D] ">
           <p className="text-2xl font-bold pb-5">Manage Account</p>
           <div className="space-y-5">
             <p
@@ -68,7 +68,7 @@ const MyAccount = () => {
             <button className="mt-2 ml-5">Logout</button>
           </div>
         </div>
-        <div className="col-span-9 bg-[#0D0D0D]">
+        <div className="col-span-8 md:col-span-9 bg-[#0D0D0D] ml-5 md:ml-0 ">
           {changeRoute === "profile" && <Profile />}
           {changeRoute === "password" && <ChnagePassword />}
           {changeRoute === "membership" && <MemberShip/>}
