@@ -26,7 +26,7 @@ const NavBar = () => {
 
           {/* Menu bars */}
           <div className="space-x-10 hidden md:flex items-center">
-            <NavLink>Home</NavLink>
+            <NavLink to={'/'}>Home</NavLink>
             <NavLink to={"/videos"}>Videos</NavLink>
             <NavLink to={"/files"}>Files</NavLink>
             <NavLink to={"/contact-us"}>Contact Us</NavLink>

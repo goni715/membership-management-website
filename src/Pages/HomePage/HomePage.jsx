@@ -10,8 +10,8 @@ const HomePage = () => {
         <div className='container mx-auto'>
            <Hero/>
               <WhyChooseUs/>
-            {/*<StepEarn/>
-            <DownloadApp/> */}
+            <StepEarn/>
+            <DownloadApp/>
         </div>
     </div>
   )

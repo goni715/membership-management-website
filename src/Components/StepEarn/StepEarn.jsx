@@ -2,9 +2,9 @@ import React from "react";
 
 const StepEarn = () => {
   return (
-    <div className=" text-white py-20">
-      <p className="text-center text-[48px] font-bold pb-10">3 Step to Earn</p>
-      <div className="mt-10 md:flex justify-between items-center">
+    <div className=" text-white py-20 px-2 ms:px-0">
+      <p className="text-center text-[30px] md:text-[48px]  font-bold pb-10">3 Step to Earn</p>
+      <div className="mt-10 md:flex justify-between items-center space-y-20">
         <div className="bg-[#0D0D0D] rounded-md shadow-2xl p-10 relative">
             <p className="bg-[#1479FD] p-5 rounded-full text-4xl font-extrabold inline-block absolute -top-8">01</p>
             <p className="text-xl font-bold mt-10">Refer Friends</p>
