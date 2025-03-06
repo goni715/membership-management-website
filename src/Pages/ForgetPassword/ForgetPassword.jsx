@@ -1,6 +1,7 @@
 import React from "react";
 import bg from "../../assets/images/login.png";
 import { Form, Input } from "antd";
+import { Link } from "react-router";
 
 const ForgetPassword = () => {
   return (
@@ -20,7 +21,7 @@ const ForgetPassword = () => {
             <Form.Item label={<p className="text-white">Email Address</p>}>
                 <Input  placeholder="esteban_schiller@gmail.com" />
             </Form.Item>
-            <button className="bg-[#22A59A] py-2 text-white w-full rounded-sm cursor-pointer">Continue</button>
+            <Link to={'/verify-otp'}><button className="bg-[#22A59A] py-2 text-white w-full rounded-sm cursor-pointer">Continue</button></Link>
         </Form>
       </div>
     </div>

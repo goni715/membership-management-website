@@ -15,6 +15,8 @@ import VideosPage from "./Pages/VideosPage/VideosPage.jsx";
 import FilesPage from "./Pages/FilesPage/FilesPage.jsx";
 import UpdateProfile from "./Pages/UpdateProfile/UpdateProfile.jsx";
 import ForgetPassword from "./Pages/ForgetPassword/ForgetPassword.jsx";
+import VerifyOtp from "./Pages/VerifyOtp/VerifyOtp.jsx";
+import SetNewPassword from "./Pages/SetNewPassword/SetNewPassword.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -35,6 +37,8 @@ createRoot(document.getElementById("root")).render(
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register/>} />
         <Route path="/forget-password" element={<ForgetPassword/>} />
+        <Route path="/verify-otp" element={<VerifyOtp/>} />
+        <Route path="/set-new-password" element={<SetNewPassword/>} />
       </Routes>
     </BrowserRouter>
   </StrictMode>
