@@ -12,6 +12,7 @@ import TermsConditions from "./Pages/TermsConditions/TermsConditions.jsx";
 import Notification from "./Pages/Notification/Notification.jsx";
 import MyAccount from "./Pages/MyAccount/MyAccount.jsx";
 import VideosPage from "./Pages/VideosPage/VideosPage.jsx";
+import FilesPage from "./Pages/FilesPage/FilesPage.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -25,6 +26,7 @@ createRoot(document.getElementById("root")).render(
           <Route path="/notification" element={<Notification/>} />
           <Route path="/my-profile" element={<MyAccount/>} />
           <Route path="/videos" element={<VideosPage/>} />
+          <Route path="/files" element={<FilesPage/>} />
           
         </Route>
         <Route path="/login" element={<Login/>} />

@@ -119,7 +119,6 @@ const VideosPage = () => {
                 )
             })
         }
-            <div></div>
       </div>
     </div>
   );

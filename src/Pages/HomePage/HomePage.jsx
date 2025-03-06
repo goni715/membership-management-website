@@ -8,10 +8,10 @@ const HomePage = () => {
   return (
     <div className='bg-[#090909]'>
         <div className='container mx-auto'>
-            <Hero/>
-            <WhyChooseUs/>
-            <StepEarn/>
-            <DownloadApp/>
+           <Hero/>
+              <WhyChooseUs/>
+            {/*<StepEarn/>
+            <DownloadApp/> */}
         </div>
     </div>
   )

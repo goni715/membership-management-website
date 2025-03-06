@@ -8,14 +8,14 @@ import messenger from '../../assets/images/messenger.png'
 import twitter from '../../assets/images/twitter.png'
 const Hero = () => {
   return (
-    <div className='text-white grid grid-cols-1 md:grid-cols-2 justify-between py-20'>
+    <div className='text-white grid grid-cols-1 md:grid-cols-2 justify-between py-20 px-2 md:px-0'>
         <div>
-            <p className='text-[64px] font-bold mb-5'>Refer & Earn Rewards</p>
+            <p className='text-[30px] md:text-[64px]  font-bold mb-5'>Refer & Earn Rewards</p>
             <p>Refer Your Friends, Earn Real Cash, and Withdraw Instantly</p>
             <p>– No Limits, No Hassle!</p>
-            <div className='flex items-center gap-4'>
+            <div className='md:flex items-center gap-4'>
                 <p>Share referral code through</p>
-                <div className='flex items-center gap-1'>
+                <div className='flex items-center gap-1 my-5'>
                     <img src={face} alt="" />
                     <img src={whats} alt="" />
                     <img src={instagram} alt="" />
