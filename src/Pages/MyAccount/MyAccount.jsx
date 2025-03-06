@@ -6,9 +6,14 @@ import ChnagePassword from "../../Components/ChnagePassword/ChnagePassword";
 import MemberShip from "../../Components/MemberShip/MemberShip";
 import Wallet from "../../Components/Wallet/Wallet";
 import RefferralHistory from "../../Components/RefferralHistory/RefferralHistory";
+import UpdateProfile from "../UpdateProfile/UpdateProfile";
 
 const MyAccount = () => {
   const [changeRoute, setChangeRoute] = useState("profile");
+  console.log(changeRoute);
+  // const handleUpdateProfile = ()=>{
+  //   setChangeRoute('changeProfile')
+  // }
   return (
     <div className="text-white container mx-auto">
       <p className="text-center text-4xl font-semibold pt-10 ">My Account</p>
@@ -69,11 +74,12 @@ const MyAccount = () => {
           </div>
         </div>
         <div className="col-span-8 md:col-span-9 bg-[#0D0D0D] ml-5 md:ml-0 ">
-          {changeRoute === "profile" && <Profile />}
+          {changeRoute === "profile" && <Profile setChangeRoute={setChangeRoute} />}
           {changeRoute === "password" && <ChnagePassword />}
           {changeRoute === "membership" && <MemberShip/>}
           {changeRoute === "wallet" && <Wallet/>}
           {changeRoute === "referral" && <RefferralHistory/>}
+          {changeRoute === "updateProfile" && <UpdateProfile/>}
         </div>
       </div>
     </div>
