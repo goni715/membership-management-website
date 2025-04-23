@@ -1,0 +1,37 @@
+import { baseApi } from "@/redux/api/baseApi";
+
+const authApi = baseApi.injectEndpoints({
+  endpoints: (builder) => ({
+    register: builder.mutation({
+      query: (newUser) => ({
+        url: "/auth/sign-up",
+        method: "POST",
+        body: newUser,
+      }),
+    }),
+    validateOTP: builder.mutation({
+      query: (data) => ({
+        url: "/auth/validate-otp",
+        method: "POST",
+        body: data,
+      }),
+    }),
+    login: builder.mutation({
+      query: (credentials) => ({
+        url: "/auth/sign-in",
+        method: "POST",
+        body: credentials,
+      }),
+    }),
+    profile: builder.query({
+      query: () => ({
+        url: "/profile",
+        method: "GET",
+      }),
+      providesTags: ["profile"],
+    }),
+  }),
+});
+
+export const { useRegisterMutation, useLoginMutation, useProfileQuery, useValidateOTPMutation } =
+  authApi;

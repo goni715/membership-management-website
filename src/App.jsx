@@ -10,11 +10,9 @@ function App() {
       <div className="min-h-[78vh] bg-[#090909]">
         <Outlet />
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 }
 
 export default App;
-
-

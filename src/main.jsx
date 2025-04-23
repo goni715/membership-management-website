@@ -13,33 +13,45 @@ import Notification from "./Pages/Notification/Notification.jsx";
 import MyAccount from "./Pages/MyAccount/MyAccount.jsx";
 import VideosPage from "./Pages/VideosPage/VideosPage.jsx";
 import FilesPage from "./Pages/FilesPage/FilesPage.jsx";
-import UpdateProfile from "./Pages/UpdateProfile/UpdateProfile.jsx";
 import ForgetPassword from "./Pages/ForgetPassword/ForgetPassword.jsx";
 import VerifyOtp from "./Pages/VerifyOtp/VerifyOtp.jsx";
 import SetNewPassword from "./Pages/SetNewPassword/SetNewPassword.jsx";
+import { Toaster } from "react-hot-toast";
+import { store } from "@/redux/store.js";
+import { Provider } from "react-redux";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App/>}  >
-          <Route index  element={<HomePage/>} />
-          <Route path="/contact-us" element={<ContactUs/>} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy/>} />
-          <Route path="/terms-conditions" element={<TermsConditions/>} />
-          <Route path="/notification" element={<Notification/>} />
-          <Route path="/my-profile" element={<MyAccount/>} />
-          <Route path="/videos" element={<VideosPage/>} />
-          <Route path="/files" element={<FilesPage/>} />
-          {/* <Route path="/update-profile" element={<UpdateProfile/>} /> */}
-          
-        </Route>
-        <Route path="/login" element={<Login/>} />
-        <Route path="/register" element={<Register/>} />
-        <Route path="/forget-password" element={<ForgetPassword/>} />
-        <Route path="/verify-otp" element={<VerifyOtp/>} />
-        <Route path="/set-new-password" element={<SetNewPassword/>} />
-      </Routes>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route index element={<HomePage />} />
+            <Route path="/contact-us" element={<ContactUs />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-conditions" element={<TermsConditions />} />
+            <Route path="/notification" element={<Notification />} />
+            <Route
+              path="/my-profile"
+              element={
+                <ProtectedRoute>
+                  <MyAccount />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/videos" element={<VideosPage />} />
+            <Route path="/files" element={<FilesPage />} />
+            {/* <Route path="/update-profile" element={<UpdateProfile/>} /> */}
+          </Route>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/forget-password" element={<ForgetPassword />} />
+          <Route path="/verify-otp" element={<VerifyOtp />} />
+          <Route path="/set-new-password" element={<SetNewPassword />} />
+        </Routes>
+      </BrowserRouter>
+      <Toaster position="bottom-right" />
+    </Provider>
   </StrictMode>
 );
