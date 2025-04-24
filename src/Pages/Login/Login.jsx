@@ -23,8 +23,8 @@ const Login = () => {
 
   const [loginFn] = useLoginMutation();
 
-  const onSubmit = async (data) => {
-    await loginFn(data)
+  const onSubmit =  (data) => {
+    loginFn(data)
       .unwrap()
       .then((res) => {
         if (res?.accessToken) {

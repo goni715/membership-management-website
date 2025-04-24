@@ -27,7 +27,6 @@ const VerifyOtp = () => {
     }
 
     const data = { otp: OTP, email: state?.email };
-    // console.log(data);
 
     validateFn(data)
       .unwrap()

@@ -20,9 +20,8 @@ const Register = () => {
 
   const [registerFn] = useRegisterMutation();
 
-  const onSubmit = async (data) => {
-    
-    await registerFn(data)
+  const onSubmit = (data) => {
+    registerFn(data)
       .unwrap()
       .then((res) => {
         if (res?.success) {

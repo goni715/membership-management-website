@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-import { Link } from "react-router";
 import { Profile } from "../../Components/Profile/Profile";
 import ChnagePassword from "../../Components/ChnagePassword/ChnagePassword";
 import MemberShip from "../../Components/MemberShip/MemberShip";
@@ -12,11 +11,8 @@ import { removeToken } from "@/redux/features/auth/authSlice";
 
 const MyAccount = () => {
   const [changeRoute, setChangeRoute] = useState("profile");
-  console.log(changeRoute);
-  // const handleUpdateProfile = ()=>{
-  //   setChangeRoute('changeProfile')
-  // }
   const dispatch = useDispatch();
+  
   return (
     <div className="text-white container mx-auto">
       <p className="text-center text-4xl font-semibold pt-10 ">My Account</p>
@@ -88,7 +84,7 @@ const MyAccount = () => {
           {changeRoute === "profile" && (
             <Profile setChangeRoute={setChangeRoute} />
           )}
-          {changeRoute === "password" && <ChnagePassword />}
+          {changeRoute === "password" && <ChnagePassword setChangeRoute={setChangeRoute} />}
           {changeRoute === "membership" && <MemberShip />}
           {changeRoute === "wallet" && <Wallet />}
           {changeRoute === "referral" && <RefferralHistory />}
