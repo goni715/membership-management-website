@@ -59,15 +59,15 @@ const NavBar = () => {
               <NavLink to={"/videos"}>Videos</NavLink>
               <NavLink to={"/files"}>Files</NavLink>
               <NavLink to={"/contact-us"}>Contact Us</NavLink>
-              <NavLink
-                to={"/notification"}
-                className={"bg-white p-1.5 rounded-full"}
-              >
-                <IoMdNotificationsOutline size={22} color="#22A59A" />
-              </NavLink>
 
               {decodedToken?.userId ? (
                 <>
+                  <NavLink
+                    to={"/notification"}
+                    className={"bg-white p-1.5 rounded-full"}
+                  >
+                    <IoMdNotificationsOutline size={22} color="#22A59A" />
+                  </NavLink>
                   <NavLink to={"/my-profile"}>
                     <Avatar
                       size="large"
@@ -98,14 +98,17 @@ const NavBar = () => {
               >
                 <HiX size={28} />
               </button>
-              <NavLink to={"/my-profile"} className={"mb-5"}>
-                <Avatar
-                  size="large"
-                  icon={<UserOutlined />}
-                  src={profileData?.photoUrl}
-                  alt="profile image"
-                />
-              </NavLink>
+              {decodedToken?.userId && (
+                <NavLink to={"/my-profile"} className={"mb-5"}>
+                  <Avatar
+                    size="large"
+                    icon={<UserOutlined />}
+                    src={profileData?.photoUrl}
+                    alt="profile image"
+                  />
+                </NavLink>
+              )}
+
               <NavLink
                 to={"/"}
                 className={"mb-2"}
@@ -134,17 +137,21 @@ const NavBar = () => {
               >
                 Contact Us
               </NavLink>
-              <NavLink
-                to={"/notification"}
-                onClick={() => setMenuOpen(false)}
-                className={"bg-white p-1.5 rounded-full mb-2"}
-              >
-                <IoMdNotificationsOutline size={22} color="#22A59A" />
-              </NavLink>
-
-              <button className="bg-[#22A59A] px-4 py-2 rounded-sm shadow-2xl">
-                Log in
-              </button>
+              {decodedToken?.userId ? (
+                <NavLink
+                  to={"/notification"}
+                  onClick={() => setMenuOpen(false)}
+                  className={"bg-white p-1.5 rounded-full mb-2"}
+                >
+                  <IoMdNotificationsOutline size={22} color="#22A59A" />
+                </NavLink>
+              ) : (
+                <NavLink to={"/login"}>
+                  <button className="bg-[#22A59A] px-4 py-2 rounded-sm shadow-2xl">
+                    Log in
+                  </button>
+                </NavLink>
+              )}
             </div>
           </div>
         </div>
