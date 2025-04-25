@@ -21,6 +21,7 @@ import { store } from "@/redux/store.js";
 import { Provider } from "react-redux";
 import ProtectedRoute from "./routes/ProtectedRoute";
 
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
