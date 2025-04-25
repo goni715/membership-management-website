@@ -89,7 +89,7 @@ const FilesPage = () => {
       </p>
       <p className="mt-20">Showing {fileData?.files?.length || 0} result</p>
       <div>
-        <FileFrame files={fileData.files} />
+        <FileFrame files={fileData?.files} />
       </div>
     </div>
   );

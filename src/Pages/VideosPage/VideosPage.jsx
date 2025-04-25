@@ -92,7 +92,7 @@ const VideosPage = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10 py-10 px-2 md:px-0">
         {videoData?.videos?.map((video) => (
-          <VideoFrame key={video._id} video={video} />
+          <VideoFrame key={video?._id} video={video} />
         ))}
       </div>
       <div>

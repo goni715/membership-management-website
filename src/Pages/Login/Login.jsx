@@ -23,7 +23,7 @@ const Login = () => {
 
   const [loginFn] = useLoginMutation();
 
-  const onSubmit =  (data) => {
+  const onSubmit = (data) => {
     loginFn(data)
       .unwrap()
       .then((res) => {
@@ -39,7 +39,7 @@ const Login = () => {
         }
       })
       .catch((error) => {
-        toast.error(error?.data?.message);
+        toast.error(error?.data?.message || "Failed to login!");
       });
   };
 
