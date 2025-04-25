@@ -1,9 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { setToken, removeToken } from "../features/auth/authSlice";
-import { api_url } from "@/config";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: api_url,
+  baseUrl: import.meta.env.VITE_BASE_URL,
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.accessToken;
@@ -27,7 +26,7 @@ const baseQueryWithRefreshToken = async (args, api, extraOptions) => {
       return result;
     }
 
-    const res = await fetch(`${api_url}/auth/refresh-token`, {
+    const res = await fetch(`${import.meta.env.VITE_BASE_URL}/auth/refresh-token`, {
       method: "POST",
       credentials: "include",
       headers: {
