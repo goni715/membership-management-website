@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -11,11 +11,40 @@ import Loading from "@/Components/shared/Loading";
 import FileFrame from "@/Components/shared/FileFrame";
 
 const FilesPage = () => {
+  const { data, isLoading } = useGetToolCategoriesQuery();
+
+  const [params, setParams] = useState(null);
+
+  // Set params when data is ready
+  useEffect(() => {
+    if (data?.tools?.[0]?._id) {
+      setParams({
+        id: data.tools[0]._id,
+        type: "video",
+      });
+    }
+  }, [data]);
+
+  const { data: fileData, isLoading: videoLoading } = useGetVideosOrFilesQuery(
+    params,
+    { skip: !params }
+  );
+
+  const handleClick = (id) => {
+    setParams({ id, type: "file" });
+  };
+
+  if (isLoading || videoLoading) {
+    return <Loading />;
+  }
+
+  const slidesToShowCount = Math.min(data?.tools?.length || 5, 5);
+
   const settings = {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 5,
+    slidesToShow: slidesToShowCount,
     slidesToScroll: 1,
     arrows: true,
     responsive: [
@@ -40,21 +69,6 @@ const FilesPage = () => {
     ],
   };
 
-  const [params, setParams] = useState({});
-
-  const { data, isLoading } = useGetToolCategoriesQuery();
-
-  const { data: fileData, isLoading: videoLoading } =
-    useGetVideosOrFilesQuery(params);
-
-  const handleClick = (id) => {
-    setParams({ id, type: "file" });
-  };
-
-  if (isLoading || videoLoading) {
-    return <Loading />;
-  }
-
   return (
     <div className="container mx-auto text-white">
       <p className="text-center text-4xl font-bold pt-10">Files</p>
@@ -65,7 +79,9 @@ const FilesPage = () => {
           {data?.tools?.map((item, index) => (
             <div key={index} className="px-2">
               <div
-                className={`h-40 flex flex-col items-center justify-center rounded-lg shadow-lg text-white ${getRandomColor()} cursor-pointer transition-transform transform hover:scale-105 duration-300`}
+                className={`h-40 flex flex-col items-center justify-center rounded-lg shadow-lg text-white ${getRandomColor(
+                  index
+                )} cursor-pointer transition-transform transform hover:scale-105 duration-300`}
                 onClick={() => handleClick(item._id)}
               >
                 <div className="p-4 rounded-2xl">
