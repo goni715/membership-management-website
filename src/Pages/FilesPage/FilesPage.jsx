@@ -12,6 +12,7 @@ import FileFrame from "@/Components/shared/FileFrame";
 
 const FilesPage = () => {
   const { data, isLoading } = useGetToolCategoriesQuery();
+  const [activeCategory, setActiveCategory] = useState(null);
 
   const [params, setParams] = useState(null);
 
@@ -22,6 +23,7 @@ const FilesPage = () => {
         id: data.tools[0]._id,
         type: "video",
       });
+      setActiveCategory(data?.tools[0]?._id);
     }
   }, [data]);
 
@@ -75,16 +77,22 @@ const FilesPage = () => {
       <p className="text-center mt-2">Home/Files</p>
 
       <div className="w-full  mx-auto mt-20">
+        <h2 className="text-2xl font-medium pb-5">Category</h2>
         <Slider {...settings}>
           {data?.tools?.map((item, index) => (
             <div key={index} className="px-2">
               <div
-                className={`h-40 flex flex-col items-center justify-center rounded-lg shadow-lg text-white ${getRandomColor(
+                className={`group h-40 flex flex-col ${
+                  activeCategory == item?._id && "border-2"
+                } items-center justify-center rounded-lg shadow-lg text-white ${getRandomColor(
                   index
-                )} cursor-pointer transition-transform transform hover:scale-105 duration-300`}
-                onClick={() => handleClick(item._id)}
+                )} cursor-pointer transition-transform transform`}
+                onClick={() => {
+                  handleClick(item._id);
+                  setActiveCategory(item?._id);
+                }}
               >
-                <div className="p-4 rounded-2xl">
+                <div className="p-4 rounded-2xl group-hover:scale-125 transition-transform transform duration-500">
                   <img
                     src={item.icon}
                     alt={item.name}

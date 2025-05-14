@@ -2,19 +2,31 @@ import { currentAccessToken } from "@/redux/features/auth/authSlice";
 import React from "react";
 import { useSelector } from "react-redux";
 
-const VideoFrame = ({ video }) => {
+const VideoFrame = ({ video, isYoutube }) => {
   const accessToken = useSelector(currentAccessToken);
 
   return (
     <div className="bg-[#242424] p-4 rounded-lg cursor-pointer relative shadow-lg transition-all duration-300 hover:scale-105">
       <div className="relative w-full h-64 bg-gray-300 rounded-lg overflow-hidden">
         {/* Video Player */}
-        <video
-          controls
-          className="object-cover w-full h-full rounded-lg"
-          src={`${video?.url}?token=${accessToken}`} // Use the video URL from backend
-          type="video/mp4"
-        />
+        {isYoutube ? (
+          <iframe
+            width="100%"
+            height="100%"
+            className="object-cover w-full h-full rounded-lg"
+            src={`${video?.url}?token=${accessToken}`}
+            frameBorder="0"
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+          ></iframe>
+        ) : (
+          <video
+            controls
+            className="object-cover w-full h-full rounded-lg"
+            src={`${video?.url}?token=${accessToken}`} // Use the video URL from backend
+            type="video/mp4"
+          />
+        )}
       </div>
 
       {/* Video Title */}

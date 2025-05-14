@@ -8,3 +8,9 @@
   background: #333333;
   color: white;
 }
+
+:where(.css-dev-only-do-not-override-1v5z42l).ant-input-group-wrapper-lg
+  .ant-input-group-addon {
+  border-radius: 8px;
+  font-size: 21px;
+}

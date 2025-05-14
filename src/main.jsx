@@ -1,4 +1,3 @@
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
@@ -20,6 +19,7 @@ import { Toaster } from "react-hot-toast";
 import { store } from "@/redux/store.js";
 import { Provider } from "react-redux";
 import ProtectedRoute from "./routes/ProtectedRoute";
+import "./i18n";
 
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
@@ -50,9 +50,9 @@ createRoot(document.getElementById("root")).render(
           <Route
             path="/files"
             element={
-              <VideosPage>
+              <ProtectedRoute>
                 <FilesPage />
-              </VideosPage>
+              </ProtectedRoute>
             }
           />
           {/* <Route path="/update-profile" element={<UpdateProfile/>} /> */}
