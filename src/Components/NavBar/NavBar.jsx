@@ -8,8 +8,43 @@ import { currentAccessToken } from "@/redux/features/auth/authSlice";
 import { useProfileQuery } from "@/redux/features/auth/authApi";
 import { useSelector } from "react-redux";
 import Loading from "../shared/Loading";
-import { Avatar } from "antd";
+import { Avatar, Select } from "antd";
 import { UserOutlined } from "@ant-design/icons";
+import english from "@/assets/images/uk-flag.png";
+import spanish from "@/assets/images/spain.png";
+
+const options = [
+  {
+    value: "English",
+    label: (
+      <div className="flex gap-1 items-center">
+        <img
+          className="h-5 w-5"
+          src={english}
+          height={20}
+          width={20}
+          alt="English"
+        />
+        <span>English</span>
+      </div>
+    ),
+  },
+  {
+    value: "Spanish",
+    label: (
+      <div className="flex gap-1 items-center">
+        <img
+          className="h-5 w-5"
+          src={spanish}
+          height={20}
+          width={20}
+          alt="Spanish"
+        />
+        <span>Spanish</span>
+      </div>
+    ),
+  },
+];
 
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -59,6 +94,12 @@ const NavBar = () => {
               <NavLink to={"/videos"}>Videos</NavLink>
               <NavLink to={"/files"}>Files</NavLink>
               <NavLink to={"/contact-us"}>Contact Us</NavLink>
+              <Select
+                defaultValue="English"
+                style={{ width: 110, marginRight: "10px" }}
+                optionLabelProp="label"
+                options={options}
+              />
 
               {decodedToken?.userId ? (
                 <>
