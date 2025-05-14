@@ -55,7 +55,7 @@ const Login = () => {
         }}
         className="h-screen flex justify-center items-center"
       >
-        <div className="text-white bg-black opacity-75 p-10 rounded-2xl shadow-2xl">
+        <div className="text-white bg-black opacity-90 p-10 rounded-2xl shadow-2xl">
           <p className="text-center text-[32px] text-white">Login to Account</p>
           <p className="mb-8">
             Please enter your email and password to continue
@@ -77,6 +77,7 @@ const Login = () => {
                 }}
                 render={({ field }) => (
                   <Input
+                    className="login-input text-white"
                     {...field}
                     placeholder="esteban_schiller@gmail.com"
                     size="large" // Set the size to "large"
@@ -116,7 +117,7 @@ const Login = () => {
                   render={({ field }) => (
                     <Checkbox {...field} checked={field.value} />
                   )}
-                />
+                />{" "}
                 Remember me
               </p>
               <Link to="/forget-password">

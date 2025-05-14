@@ -45,6 +45,12 @@ const authApi = baseApi.injectEndpoints({
       }),
       providesTags: ["profile"],
     }),
+    terms: builder.query({
+      query: () => ({
+        url: "/legal/terms",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -55,4 +61,5 @@ export const {
   useValidateOTPMutation,
   useChangePasswordMutation,
   useUpdateProfileMutation,
+  useTermsQuery,
 } = authApi;

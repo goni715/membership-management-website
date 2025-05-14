@@ -39,8 +39,22 @@ createRoot(document.getElementById("root")).render(
               </ProtectedRoute>
             }
           />
-          <Route path="/videos" element={<VideosPage />} />
-          <Route path="/files" element={<FilesPage />} />
+          <Route
+            path="/videos"
+            element={
+              <ProtectedRoute>
+                <VideosPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/files"
+            element={
+              <VideosPage>
+                <FilesPage />
+              </VideosPage>
+            }
+          />
           {/* <Route path="/update-profile" element={<UpdateProfile/>} /> */}
         </Route>
         <Route path="/login" element={<Login />} />

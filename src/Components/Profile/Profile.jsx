@@ -12,13 +12,17 @@ export const Profile = ({ setChangeRoute }) => {
 
   const formattedDateOfBirth = profileData?.dateOfBirth
     ? moment(profileData.dateOfBirth).format("DD/MM/YYYY")
-    : "N/A"; 
+    : "N/A";
 
   return (
     <div className="p-4">
       <p className="text-xl font-bold">Profile</p>
       <div className="flex justify-center flex-col items-center">
-        <img src={profileData?.photoUrl} className="h-20 w-20 rounded-full" alt="" />
+        <img
+          src={profileData?.photoUrl}
+          className="h-20 w-20 rounded-full"
+          alt=""
+        />
         <p className="mt-2 text-2xl font-semibold">{profileData?.name}</p>
         <p>{profileData?.email}</p>
       </div>

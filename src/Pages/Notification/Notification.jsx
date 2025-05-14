@@ -13,7 +13,7 @@ const Notification = () => {
   const notifications = data?.notifications || [];
 
   return (
-    <div className="text-white container mx-auto">
+    <div className="text-white container mx-auto pb-5">
       <p className="text-center text-4xl font-semibold pt-10">Notifications</p>
       <p className="text-center mt-2 mb-20">Home / Notification</p>
 

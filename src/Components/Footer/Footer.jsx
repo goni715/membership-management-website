@@ -19,7 +19,7 @@ const Footer = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 justify-center items-center">
             <div className="flex justify-between py-5 mx-5">
-              <p>
+              <p className="mr-5">
                 <Link to={"/terms-conditions"}>Terms & Conditions</Link>
               </p>
               <Link to={"/privacy-policy"}>Privacy Policy</Link>

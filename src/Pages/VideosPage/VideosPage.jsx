@@ -76,6 +76,7 @@ const VideosPage = () => {
       <p className="text-center mt-2">Home/Videos</p>
 
       <div className="w-full  mx-auto mt-20">
+      <p className=" text-xl font-medium">Category</p>
         <Slider {...settings}>
           {data?.tools?.map((item, index) => (
             <div key={index} className="px-2">
