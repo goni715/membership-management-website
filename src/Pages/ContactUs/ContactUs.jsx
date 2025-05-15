@@ -6,8 +6,10 @@ import { Input } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
 
 const ContactUs = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const {
     control,
@@ -27,29 +29,28 @@ const ContactUs = () => {
       });
 
       if (response.ok) {
-        toast.success("Message sent successfully");
+        toast.success(t("messageSentSuccess"));
         reset();
         navigate("/");
       } else {
-        toast.error("Failed to send message");
+        toast.error(t("failedToSendMessage"));
       }
     } catch {
-      toast.error("Something went wrong. Please try again later.");
+      toast.error(t("somethingWentWrong"));
     }
   };
 
   return (
     <div className="text-white container mx-auto">
-      <p className="text-center text-4xl font-semibold pt-10">Contact Us</p>
-      <p className="text-center mt-2">Home / Contact Us</p>
+      <p className="text-center text-4xl font-semibold pt-10">
+        {t("contactUs")}
+      </p>
+      <p className="text-center mt-2">{t("homeContactUs")}</p>
       <div className="md:flex justify-between gap-36 mt-20 py-20">
         {/* Contact Details */}
         <div className="w-full">
-          <p className="text-2xl font-bold">Contact Details</p>
-          <p className="mt-5">
-            We’re here to help! If you have any questions, concerns, or feedback
-            regarding our Refer & Earn Program, feel free to reach out to us.
-          </p>
+          <p className="text-2xl font-bold">{t("contactDetails")}</p>
+          <p className="mt-5">{t("contactDetailsDescription")}</p>
           <p className="flex items-center gap-2 mt-5">
             <FaPhoneAlt color="#22A59A" /> 839949950252
           </p>
@@ -67,13 +68,13 @@ const ContactUs = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             {/* Full Name */}
             <div className="mb-4">
-              <label className="text-white text-lg">Full Name</label>
+              <label className="text-white text-lg">{t("fullName")}</label>
               <Controller
                 name="fullName"
                 control={control}
-                rules={{ required: "Full name is required" }}
+                rules={{ required: t("fullNameRequired") }}
                 render={({ field }) => (
-                  <Input {...field} size="large" placeholder="Type Name" />
+                  <Input {...field} size="large" placeholder={t("typeName")} />
                 )}
               />
               {errors.fullName && (
@@ -85,15 +86,15 @@ const ContactUs = () => {
 
             {/* Email */}
             <div className="mb-4">
-              <label className="text-white text-lg">Email</label>
+              <label className="text-white text-lg">{t("email")}</label>
               <Controller
                 name="email"
                 control={control}
                 rules={{
-                  required: "Email is required",
+                  required: t("emailRequired"),
                   pattern: {
                     value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-                    message: "Please enter a valid email address",
+                    message: t("emailValid"),
                   },
                 }}
                 render={({ field }) => (
@@ -101,7 +102,7 @@ const ContactUs = () => {
                     {...field}
                     size="large"
                     type="email"
-                    placeholder="Type Email"
+                    placeholder={t("typeEmail")}
                   />
                 )}
               />
@@ -114,17 +115,17 @@ const ContactUs = () => {
 
             {/* Phone Number */}
             <div className="mb-4">
-              <label className="text-white text-lg">Phone Number</label>
+              <label className="text-white text-lg">{t("phoneNumber")}</label>
               <Controller
                 name="phone"
                 control={control}
-                rules={{ required: "Phone number is required" }}
+                rules={{ required: t("phoneRequired") }}
                 render={({ field }) => (
                   <Input
                     {...field}
                     size="large"
                     type="tel"
-                    placeholder="Phone Number..."
+                    placeholder={t("phonePlaceholder")}
                   />
                 )}
               />
@@ -137,13 +138,17 @@ const ContactUs = () => {
 
             {/* Message */}
             <div className="mb-4">
-              <label className="text-white text-lg">Message</label>
+              <label className="text-white text-lg">{t("message")}</label>
               <Controller
                 name="message"
                 control={control}
-                rules={{ required: "Message is required" }}
+                rules={{ required: t("messageRequired") }}
                 render={({ field }) => (
-                  <TextArea {...field} size="large" placeholder="Message..." />
+                  <TextArea
+                    {...field}
+                    size="large"
+                    placeholder={t("messagePlaceholder")}
+                  />
                 )}
               />
               {errors.message && (
@@ -158,7 +163,7 @@ const ContactUs = () => {
               type="submit"
               className="bg-[#22A59A] w-full text-white rounded-sm py-2 text-xl cursor-pointer"
             >
-              Submit
+              {t("submit")}
             </button>
           </form>
         </div>

@@ -6,8 +6,8 @@
   "login": "Login",
   "myProfile": "My Profile",
   "notifications": "Notifications",
-  "referEarnRewards": "Refer & Earn Rewards",
 
+  "referEarnRewards": "Refer & Earn Rewards",
   "referFriendsEarnCash": "Refer Your Friends, Earn Real Cash, and Withdraw Instantly",
   "noLimitsNoHassle": "No Limits, No Hassle!",
   "shareReferralCodeThrough": "Share referral code through",
@@ -89,14 +89,14 @@
   "referralHistory": "Referral History",
   "logout": "Logout",
 
-   "profileTitle": "Profile",
+  "profileTitle": "Profile",
   "profilePictureAlt": "Profile Picture",
   "phoneNumberLabel": "Phone Number",
   "dateOfBirthLabel": "Date of Birth",
   "updateButton": "Update",
   "notAvailable": "N/A",
 
-   "changePasswordTitle": "Change Password",
+  "changePasswordTitle": "Change Password",
   "currentPasswordLabel": "Current Password",
   "currentPasswordRequired": "Current password is required",
   "newPasswordLabel": "New Password",
@@ -119,7 +119,7 @@
   "noPaymentHistory": "No payment history available",
   "somethingWentWrong": "Something went wrong, please try again.",
 
-   "walletTitle": "Wallet",
+  "walletTitle": "Wallet",
   "walletIconAlt": "Wallet icon",
   "totalBalance": "Total Balance",
   "withdrawNow": "Withdraw Now",
@@ -187,7 +187,22 @@
   "confirmPasswordIsRequired": "Confirm Password is required",
   "avantraReferralCode": "Avantra Referral Code",
   "codeHere": "Code here",
-  "alreadyHaveAccount": "Already have an account?"
+  "alreadyHaveAccount": "Already have an account?",
 
-
+  "homeContactUs": "Home / Contact Us",
+  "contactDetails": "Contact Details",
+  "contactDetailsDescription": "We’re here to help! If you have any questions, concerns, or feedback regarding our Refer & Earn Program, feel free to reach out to us.",
+  "fullNameRequired": "Full name is required",
+  "typeName": "Type Name",
+  "email": "Email",
+  "emailValid": "Please enter a valid email address",
+  "typeEmail": "Type Email",
+  "phoneNumber": "Phone Number",
+  "phoneRequired": "Phone number is required",
+  "phonePlaceholder": "Phone Number...",
+  "message": "Message",
+  "messageRequired": "Message is required",
+  "messagePlaceholder": "Message...",
+  "messageSentSuccess": "Message sent successfully",
+  "failedToSendMessage": "Failed to send message"
 }

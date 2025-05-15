@@ -188,5 +188,22 @@
   "confirmPasswordIsRequired": "Confirmar contraseña es obligatorio",
   "avantraReferralCode": "Código de referido Avantra",
   "codeHere": "Código aquí",
-  "alreadyHaveAccount": "¿Ya tienes una cuenta?"
+  "alreadyHaveAccount": "¿Ya tienes una cuenta?",
+
+  "homeContactUs": "Inicio / Contáctanos",
+  "contactDetails": "Detalles de Contacto",
+  "contactDetailsDescription": "¡Estamos aquí para ayudarte! Si tienes preguntas, dudas o comentarios sobre nuestro Programa de Referidos, no dudes en contactarnos.",
+  "fullNameRequired": "El nombre completo es obligatorio",
+  "typeName": "Escribe tu nombre",
+  "email": "Correo Electrónico",
+  "emailValid": "Por favor, ingresa una dirección de correo válida",
+  "typeEmail": "Escribe tu correo electrónico",
+  "phoneNumber": "Número de Teléfono",
+  "phoneRequired": "El número de teléfono es obligatorio",
+  "phonePlaceholder": "Número de Teléfono...",
+  "message": "Mensaje",
+  "messageRequired": "El mensaje es obligatorio",
+  "messagePlaceholder": "Mensaje...",
+  "messageSentSuccess": "Mensaje enviado con éxito",
+  "failedToSendMessage": "Error al enviar el mensaje"
 }

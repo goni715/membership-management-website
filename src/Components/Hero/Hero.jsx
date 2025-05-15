@@ -13,8 +13,10 @@ import { useSelector } from "react-redux";
 import { currentAccessToken } from "@/redux/features/auth/authSlice";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
 
 const Hero = () => {
+  const { t } = useTranslation();
   const { data: profileData } = useProfileQuery();
   const [decodedToken, setDecodedToken] = useState(null);
   const accessToken = useSelector(currentAccessToken);
@@ -102,12 +104,12 @@ const Hero = () => {
     <div className="text-white grid grid-cols-1 md:grid-cols-2 justify-between py-20 px-2 md:px-0">
       <div>
         <p className="text-[30px] md:text-[64px] font-bold mb-5">
-          Refer & Earn Rewards
+          {t("referEarnRewards")}
         </p>
-        <p>Refer Your Friends, Earn Real Cash, and Withdraw Instantly</p>
-        <p>– No Limits, No Hassle!</p>
+        <p>{t("referFriendsEarnCash")}</p>
+        <p>{t("noLimitsNoHassle")}</p>
         <div className="md:flex items-center gap-4">
-          <p>Share referral code through</p>
+          <p>{t("shareReferralCodeThrough")}</p>
 
           <div className="flex items-center gap-1 my-5">
             <img
@@ -144,7 +146,7 @@ const Hero = () => {
             onClick={handleReferring}
             className="bg-[#22A59A] px-5 text-white rounded-sm py-2 cursor-pointer max-h-10"
           >
-            Start Referring
+            {t("startReferring")}
           </button>
         ) : (
           <div className="flex items-center gap-4">
@@ -158,7 +160,7 @@ const Hero = () => {
                   onClick={() => handleCopy(profileData?.referralCode)}
                   className="text-[#22A59A] font-black rounded-sm px-3 py-2 cursor-pointer"
                 >
-                  <CopyOutlined size={40}  />
+                  <CopyOutlined size={40} />
                 </button>
               }
             />
