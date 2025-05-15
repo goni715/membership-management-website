@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import bg from "../../assets/images/login.png";
 import { Form, Input } from "antd";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { useForm, Controller } from "react-hook-form";
 import { useRegisterMutation } from "@/redux/features/auth/authApi";
 import toast from "react-hot-toast";
@@ -10,13 +10,27 @@ import { useTranslation } from "react-i18next";
 
 const Register = () => {
   const { t } = useTranslation();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const referralCode = queryParams.get("code");
 
   const {
     control,
     handleSubmit,
     getValues,
+    setValue,
     formState: { errors, isSubmitting },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      referralCode: "",
+    },
+  });
+
+  useEffect(() => {
+    if (referralCode) {
+      setValue("referralCode", referralCode);
+    }
+  }, [referralCode, setValue]);
 
   const navigate = useNavigate();
 
@@ -71,7 +85,9 @@ const Register = () => {
               )}
             </Form.Item>
 
-            <Form.Item label={<p className="text-white">{t("emailAddress")}</p>}>
+            <Form.Item
+              label={<p className="text-white">{t("emailAddress")}</p>}
+            >
               <Controller
                 name="email"
                 control={control}
@@ -113,7 +129,9 @@ const Register = () => {
               )}
             </Form.Item>
 
-            <Form.Item label={<p className="text-white">{t("confirmPassword")}</p>}>
+            <Form.Item
+              label={<p className="text-white">{t("confirmPassword")}</p>}
+            >
               <Controller
                 name="confirmPassword"
                 control={control}
@@ -135,7 +153,9 @@ const Register = () => {
               )}
             </Form.Item>
 
-            <Form.Item label={<p className="text-white">{t("avantraReferralCode")}</p>}>
+            <Form.Item
+              label={<p className="text-white">{t("avantraReferralCode")}</p>}
+            >
               <Controller
                 name="referralCode"
                 control={control}

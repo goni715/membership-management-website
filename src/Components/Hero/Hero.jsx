@@ -6,7 +6,7 @@ import instagram from "../../assets/images/instagram.png";
 import telegram from "../../assets/images/telegram.png";
 import messenger from "../../assets/images/messenger.png";
 import twitter from "../../assets/images/twitter.png";
-import { Input, message } from "antd";
+import { Input } from "antd";
 import { CopyOutlined } from "@ant-design/icons";
 import { useProfileQuery } from "@/redux/features/auth/authApi";
 import { useSelector } from "react-redux";
@@ -14,6 +14,7 @@ import { currentAccessToken } from "@/redux/features/auth/authSlice";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
+import toast from "react-hot-toast";
 
 const Hero = () => {
   const { t } = useTranslation();
@@ -38,10 +39,10 @@ const Hero = () => {
     navigator.clipboard
       .writeText(text)
       .then(() => {
-        message.success("Referral code copied to clipboard!"); // Success message
+        toast.success(t("referralCodeCopied"));
       })
       .catch(() => {
-        message.error("Failed to copy text!"); // Error message
+        toast.error(t("failedToCopy"));
       });
   };
 
@@ -50,13 +51,13 @@ const Hero = () => {
   };
 
   const handleShare = (platform) => {
-    const referralLink = `${window.location.origin}/referral/${profileData?.referralCode}`;
+    const referralLink = `${window.location.origin}/register?code=${profileData?.referralCode}`;
     const message = `Hey! Join me on this amazing platform and earn rewards with my referral code: ${profileData?.referralCode}`;
 
     switch (platform) {
       case "whatsapp":
         window.open(
-          `https://wa.me/?text=${encodeURIComponent(message)}`,
+          `https://wa.me/?text=${encodeURIComponent(referralLink)}`,
           "_blank"
         );
         break;
@@ -71,7 +72,7 @@ const Hero = () => {
       case "twitter":
         window.open(
           `https://twitter.com/intent/tweet?text=${encodeURIComponent(
-            message
+            referralLink
           )}`,
           "_blank"
         );
@@ -85,13 +86,13 @@ const Hero = () => {
         window.open(
           `https://t.me/share/url?url=${encodeURIComponent(
             referralLink
-          )}&text=${encodeURIComponent(message)}`,
+          )}&text=${encodeURIComponent(referralLink)}`,
           "_blank"
         );
         break;
       case "messenger":
         window.open(
-          `https://www.messenger.com/t/?text=${encodeURIComponent(message)}`,
+          `https://www.messenger.com/t/?text=${encodeURIComponent(referralLink)}`,
           "_blank"
         );
         break;
@@ -149,11 +150,11 @@ const Hero = () => {
             {t("startReferring")}
           </button>
         ) : (
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 rounded-md">
             <Input
               value={profileData?.referralCode}
               readOnly
-              className="max-w-[320px] text-white"
+              className="max-w-[320px] text-white bg-white rounded-md"
               size="large"
               addonAfter={
                 <button
