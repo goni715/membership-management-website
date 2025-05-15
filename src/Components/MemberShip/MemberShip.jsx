@@ -9,8 +9,11 @@ import { useSelector } from "react-redux";
 import { currentAccessToken } from "@/redux/features/auth/authSlice";
 import { jwtDecode } from "jwt-decode";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 const MemberShip = () => {
+  const { t } = useTranslation();
+
   // Fetch payment history data
   const { data, isLoading } = usePaymentHistoryQuery();
   const assessToken = useSelector(currentAccessToken);
@@ -27,10 +30,10 @@ const MemberShip = () => {
   const lastPayment = data && data.length > 0 ? data[0] : null;
   const lastPaymentDate = lastPayment
     ? moment(lastPayment.createdAt).format("DD MMM, YYYY")
-    : "N/A";
+    : t("notAvailable");
   const expirationDate = lastPayment
     ? moment(lastPayment.createdAt).add(1, "months").format("DD MMM, YYYY")
-    : "N/A";
+    : t("notAvailable");
 
   const handlePayment = () => {
     paymentFN(decoded?.userId)
@@ -39,35 +42,37 @@ const MemberShip = () => {
         if (res?.url) {
           window.location.href = res?.url;
         } else {
-          toast.error("Something went wrong, please try again.");
+          toast.error(t("somethingWentWrong"));
         }
       })
       .catch((err) => {
         toast.error(
-          err?.data?.message || "Something went wrong, please try again."
+          err?.data?.message || t("somethingWentWrong")
         );
       });
   };
 
   return (
     <div className="p-4 mb-10">
-      <p className="text-xl font-bold">My Membership</p>
+      <p className="text-xl font-bold">{t("myMembershipTitle")}</p>
       <div className="flex flex-col justify-center items-center">
         <h1 className="text-5xl font-bold">
           ${lastPayment ? lastPayment.amount : "10.00"}
         </h1>
-        <p className="text-xs">Per Month</p>
+        <p className="text-xs">{t("perMonth")}</p>
         <p className="mt-5 mb-1 text-sm">
-          Last Date of Payment: {lastPaymentDate}
+          {t("lastDateOfPayment")}: {lastPaymentDate}
         </p>
-        <p className="text-sm">Subscription Expires on {expirationDate}</p>
+        <p className="text-sm">
+          {t("subscriptionExpiresOn")} {expirationDate}
+        </p>
         <button
           onClick={handlePayment}
-          className="bg-[#22A59A] mt-8 px-4 py-2  rounded-sm cursor-pointer hover:brightness-90"
+          className="bg-[#22A59A] mt-8 px-4 py-2 rounded-sm cursor-pointer hover:brightness-90"
         >
-          Pay Now
+          {t("payNow")}
         </button>
-        <p className="mt-8">Payment History</p>
+        <p className="mt-8">{t("paymentHistory")}</p>
       </div>
 
       {/* Payment History */}
@@ -80,7 +85,7 @@ const MemberShip = () => {
             >
               <div>
                 <p className="text-sm">
-                  Trans ID # {payment.paymentId.slice(30)}
+                  {t("transactionId")} # {payment.paymentId.slice(30)}
                 </p>
                 <p className="text-sm">
                   {moment(payment.createdAt).format("DD MMM, YYYY • hh:mm A")}
@@ -95,16 +100,15 @@ const MemberShip = () => {
                       : "text-red-500"
                   }`}
                 >
-                  Status:{" "}
-                  {payment.paymentStatus.charAt(0).toUpperCase() +
-                    payment.paymentStatus.slice(1)}
+                  {t("status")}:{" "}
+                  {t(payment.paymentStatus === "paid" ? "paid" : "unpaid")}
                 </p>
               </div>
             </div>
           ))
         ) : (
           <p className="text-center text-gray-500 mt-5">
-            No payment history available
+            {t("noPaymentHistory")}
           </p>
         )}
       </div>

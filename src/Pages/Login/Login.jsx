@@ -8,8 +8,11 @@ import { useDispatch } from "react-redux";
 import { setToken } from "@/redux/features/auth/authSlice";
 import toast from "react-hot-toast";
 import Loading from "@/Components/shared/Loading";
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
+  const { t } = useTranslation();
+
   const {
     control,
     handleSubmit,
@@ -39,7 +42,7 @@ const Login = () => {
         }
       })
       .catch((error) => {
-        toast.error(error?.data?.message || "Failed to login!");
+        toast.error(error?.data?.message || t("failedToLogin"));
       });
   };
 
@@ -56,23 +59,25 @@ const Login = () => {
         className="h-screen flex justify-center items-center"
       >
         <div className="text-white bg-black opacity-90 p-10 rounded-2xl shadow-2xl">
-          <p className="text-center text-[32px] text-white">Login to Account</p>
-          <p className="mb-8">
-            Please enter your email and password to continue
+          <p className="text-center text-[32px] text-white">
+            {t("loginToAccount")}
           </p>
+          <p className="mb-8">{t("enterEmailPassword")}</p>
 
           {/* React Hook Form */}
           <Form layout="vertical" onFinish={handleSubmit(onSubmit)}>
             {/* Email Address */}
-            <Form.Item label={<p className="text-white">Email Address</p>}>
+            <Form.Item
+              label={<p className="text-white">{t("emailAddress")}</p>}
+            >
               <Controller
                 name="email"
                 control={control}
                 rules={{
-                  required: "Email is required",
+                  required: t("emailRequired"),
                   pattern: {
                     value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
-                    message: "Invalid email format",
+                    message: t("invalidEmailFormat"),
                   },
                 }}
                 render={({ field }) => (
@@ -80,7 +85,7 @@ const Login = () => {
                     className="login-input text-white"
                     {...field}
                     placeholder="esteban_schiller@gmail.com"
-                    size="large" // Set the size to "large"
+                    size="large"
                   />
                 )}
               />
@@ -90,16 +95,16 @@ const Login = () => {
             </Form.Item>
 
             {/* Password */}
-            <Form.Item label={<p className="text-white">Password</p>}>
+            <Form.Item label={<p className="text-white">{t("password")}</p>}>
               <Controller
                 name="password"
                 control={control}
-                rules={{ required: "Password is required" }}
+                rules={{ required: t("passwordRequired") }}
                 render={({ field }) => (
                   <Input.Password
                     {...field}
                     placeholder="**************"
-                    size="large" // Set the size to "large"
+                    size="large"
                   />
                 )}
               />
@@ -118,24 +123,26 @@ const Login = () => {
                     <Checkbox {...field} checked={field.value} />
                   )}
                 />{" "}
-                Remember me
+                {t("rememberMe")}
               </p>
               <Link to="/forget-password">
-                <p className="text-white cursor-pointer">Forgot password?</p>
+                <p className="text-white cursor-pointer">
+                  {t("forgotPassword")}
+                </p>
               </Link>
             </div>
 
             {/* Submit Button */}
             <button className="bg-[#22A59A] text-white w-full rounded-md py-2 cursor-pointer max-h-10">
-              Sign in
+              {t("signIn")}
             </button>
           </Form>
 
           {/* Signup Link */}
           <p className="text-center mt-5">
-            Don't have an account?{" "}
+            {t("dontHaveAccount")}{" "}
             <Link to="/register" className="text-[#22A59A]">
-              Sign up
+              {t("signUp")}
             </Link>
           </p>
         </div>

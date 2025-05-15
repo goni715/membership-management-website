@@ -9,8 +9,11 @@ import Loading from "../shared/Loading";
 import moment from "moment";
 import { Modal, InputNumber } from "antd";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 const Wallet = () => {
+  const { t } = useTranslation();
+
   const {
     data,
     isLoading,
@@ -40,21 +43,21 @@ const Wallet = () => {
 
   const handleModalOk = async () => {
     if (!withdrawAmount || withdrawAmount < 100) {
-      return toast.error("Minimum withdrawal amount is $100");
+      return toast.error(t("minimumWithdrawalError"));
     }
 
     if (withdrawAmount > balance) {
-      return toast.error("You don't have enough balance for this withdrawal.");
+      return toast.error(t("insufficientBalanceError"));
     }
 
     try {
       await withdrawFN(withdrawAmount).unwrap();
-      toast.success("Withdrawal request submitted!");
+      toast.success(t("withdrawalRequestSubmitted"));
       setIsModalOpen(false);
       balanceRefetch();
       withdrawRefetch();
     } catch {
-      toast.error("Something went wrong!");
+      toast.error(t("somethingWentWrong"));
     }
   };
 
@@ -64,13 +67,13 @@ const Wallet = () => {
 
   return (
     <div className="p-4 mb-10 text-white">
-      <p className="text-xl font-bold mb-6">Wallet</p>
+      <p className="text-xl font-bold mb-6">{t("walletTitle")}</p>
 
       {/* Wallet Info */}
       <div className="flex flex-col justify-center items-center bg-[#1f1f1f] p-6 rounded-lg shadow-md">
         <div className="flex items-center gap-2">
-          <img src={img} alt="wallet icon" className="w-8 h-8" />
-          <p>Total Balance:</p>
+          <img src={img} alt={t("walletIconAlt")} className="w-8 h-8" />
+          <p>{t("totalBalance")}:</p>
           <h1 className="text-xl font-semibold text-green-400">${balance}</h1>
         </div>
 
@@ -78,14 +81,14 @@ const Wallet = () => {
           onClick={handleWithdrawClick}
           className="bg-[#22A59A] mt-5 px-6 py-2 rounded-sm hover:bg-[#1f7f79] transition cursor-pointer"
         >
-          Withdraw Now
+          {t("withdrawNow")}
         </button>
 
         <p className="text-xs mt-2 text-gray-400">
-          *Minimum withdrawal amount is $100
+          *{t("minimumWithdrawalNotice")}
         </p>
 
-        <p className="mt-10 text-lg font-semibold">Withdraw History</p>
+        <p className="mt-10 text-lg font-semibold">{t("withdrawHistory")}</p>
       </div>
 
       {/* Withdraw History */}
@@ -98,7 +101,7 @@ const Wallet = () => {
             >
               <div>
                 <p className="text-sm text-white font-medium">
-                  Trans ID #{item.transactionId}
+                  {t("transactionId")} #{item.transactionId}
                 </p>
                 <p className="text-sm text-gray-400">
                   {moment(item.createdAt).format("DD MMM, YYYY • hh:mm A")}
@@ -115,34 +118,42 @@ const Wallet = () => {
                       : "text-red-500"
                   }`}
                 >
-                  Status:{" "}
-                  {item.status.charAt(0).toUpperCase() + item.status.slice(1)}
+                  {t("status")}:{" "}
+                  {t(
+                    item.status === "completed"
+                      ? "statusCompleted"
+                      : item.status === "pending"
+                      ? "statusPending"
+                      : "statusFailed"
+                  )}
                 </p>
               </div>
             </div>
           ))
         ) : (
           <div className="text-center text-gray-500 mt-10">
-            No withdrawal history found.
+            {t("noWithdrawHistory")}
           </div>
         )}
       </div>
 
       {/* Modal */}
       <Modal
-        title="Enter Withdrawal Amount"
+        title={t("enterWithdrawalAmount")}
         open={isModalOpen}
         onOk={handleModalOk}
         onCancel={handleModalCancel}
-        okText="Submit"
+        okText={t("submit")}
         confirmLoading={withdrawLoading}
       >
-        <p>Minimum $100 — Max ${balance}</p>
+        <p>
+          {t("minimumAmountNotice", { min: 100, max: balance })}
+        </p>
         <InputNumber
           size="large"
           className="w-full mt-5"
           max={balance}
-          placeholder="Enter amount"
+          placeholder={t("enterAmountPlaceholder")}
           value={withdrawAmount}
           onChange={(value) => setWithdrawAmount(value)}
         />

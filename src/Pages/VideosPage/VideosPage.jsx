@@ -10,8 +10,11 @@ import {
 import Loading from "@/Components/shared/Loading";
 import VideoFrame from "@/Components/shared/VideoFrame";
 import { getRandomColor } from "@/utils";
+import { useTranslation } from "react-i18next";
 
 const VideosPage = () => {
+  const { t } = useTranslation();
+
   const { data, isLoading } = useGetToolCategoriesQuery();
   const [activeCategory, setActiveCategory] = useState(null);
   const isYoutube =
@@ -19,7 +22,6 @@ const VideosPage = () => {
 
   const [params, setParams] = useState(null);
 
-  // Set params when data is ready
   useEffect(() => {
     if (data?.tools?.[0]?._id) {
       setParams({
@@ -54,19 +56,19 @@ const VideosPage = () => {
     arrows: true,
     responsive: [
       {
-        breakpoint: 1024, // Tablets
+        breakpoint: 1024,
         settings: {
           slidesToShow: 3,
         },
       },
       {
-        breakpoint: 768, // Mobile landscape
+        breakpoint: 768,
         settings: {
           slidesToShow: 2,
         },
       },
       {
-        breakpoint: 480, // Mobile portrait
+        breakpoint: 480,
         settings: {
           slidesToShow: 1,
         },
@@ -74,21 +76,19 @@ const VideosPage = () => {
     ],
   };
 
-  console.log({ activeCategory });
-
   return (
     <div className="container mx-auto text-white">
-      <p className="text-center text-4xl font-bold pt-10">Videos</p>
-      <p className="text-center mt-2">Home/Videos</p>
+      <p className="text-center text-4xl font-bold pt-10">{t("videosTitle")}</p>
+      <p className="text-center mt-2">{t("breadcrumbHomeVideos")}</p>
 
-      <div className="w-full  mx-auto mt-20">
-        <h2 className="text-2xl font-medium pb-5">Category</h2>
+      <div className="w-full mx-auto mt-20">
+        <h2 className="text-2xl font-medium pb-5">{t("categoryTitle")}</h2>
         <Slider {...settings}>
           {data?.tools?.map((item, index) => (
             <div key={index} className="px-2">
               <div
                 className={`group h-40 flex flex-col ${
-                  activeCategory == item?._id && "border-2"
+                  activeCategory == item?._id ? "border-2" : ""
                 } items-center justify-center rounded-lg shadow-lg text-white ${getRandomColor(
                   index
                 )} cursor-pointer transition-transform transform`}
@@ -112,11 +112,11 @@ const VideosPage = () => {
           ))}
         </Slider>
       </div>
-      <p className="text-center text-xl font-semibold mt-10">
-        Emotional Wellbeing
-      </p>
+      <p className="text-center text-xl font-semibold mt-10">{t("emotionalWellbeing")}</p>
 
-      <p className="mt-20">Showing {videoData?.videos?.length || 0} result</p>
+      <p className="mt-20">
+        {t("showingResults", { count: videoData?.videos?.length || 0 })}
+      </p>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10 py-10 px-2 md:px-0">
         {videoData?.videos?.map((video) => (
@@ -127,7 +127,7 @@ const VideosPage = () => {
         {videoData?.videos?.length === 0 && (
           <div>
             <p className="text-center text-lg text-gray-400">
-              No videos to display.
+              {t("noVideosToDisplay")}
             </p>
           </div>
         )}

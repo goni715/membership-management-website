@@ -2,31 +2,35 @@ import React, { useState } from "react";
 import bg from "../../assets/images/login.png";
 import { useLocation, useNavigate } from "react-router";
 import OTPInput from "otp-input-react";
-import { useValidateOTPMutation } from "@/redux/features/auth/authApi";
+import {
+  useResendOTPMutation,
+  useValidateOTPMutation,
+} from "@/redux/features/auth/authApi";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 const VerifyOtp = () => {
-  const [OTP, setOTP] = useState("");
+  const { t } = useTranslation();
 
+  const [OTP, setOTP] = useState("");
   const { state } = useLocation();
   const navigate = useNavigate();
 
   const [validateFn] = useValidateOTPMutation();
+  const [resendOtpFn] = useResendOTPMutation();
 
   const handleVerify = () => {
     if (!OTP) {
-      // If OTP is empty, show an error message
-      toast.error("Please enter the OTP");
+      toast.error(t("pleaseEnterOtp"));
       return;
     }
 
     if (!state?.email) {
-      // If email is not present in state, show an error message
-      toast.error("Email is missing. Please try again.");
+      toast.error(t("emailMissing"));
       return;
     }
 
-    const data = { otp: OTP, email: state?.email };
+    const data = { otp: OTP, email: state.email };
 
     validateFn(data)
       .unwrap()
@@ -37,7 +41,26 @@ const VerifyOtp = () => {
         }
       })
       .catch((error) => {
-        toast.error(error?.data?.message);
+        toast.error(error?.data?.message || t("verificationFailed"));
+      });
+  };
+
+  const handleResendOtp = () => {
+    if (!state?.email) {
+      toast.error(t("emailMissing"));
+      return;
+    }
+
+    const resendOtpData = { email: state.email, type: "signup" };
+
+    resendOtpFn(resendOtpData)
+      .unwrap()
+      .then((res) => {
+        toast.success(res?.message);
+        console.log(res);
+      })
+      .catch((error) => {
+        toast.error(error?.data?.message || t("failedToResendOtp"));
       });
   };
 
@@ -52,11 +75,10 @@ const VerifyOtp = () => {
       className="h-screen flex justify-center items-center"
     >
       <div className="text-white bg-black opacity-75 p-10 rounded-2xl shadow-2xl">
-        <p className="text-center text-[32px] text-white">Check your email</p>
-        <p className="mb-8">
-          We sent a code to your email address. Please check your email for the
-          6 digit code.
+        <p className="text-center text-[32px] text-white">
+          {t("checkYourEmail")}
         </p>
+        <p className="mb-8">{t("emailCodeSentInstruction")}</p>
         <div className="my-10">
           <OTPInput
             value={OTP}
@@ -71,15 +93,20 @@ const VerifyOtp = () => {
         </div>
 
         <button
-          className={"py-2 bg-[#22A59A] w-full rounded-sm cursor-pointer"}
+          className="py-2 bg-[#22A59A] w-full rounded-sm cursor-pointer"
           onClick={handleVerify}
         >
-          Verify
+          {t("verify")}
         </button>
 
         <p className="mt-2 text-center">
-          You have not received the email?
-          <span className="text-[#22A59A]">Resend</span>
+          {t("notReceivedEmail")}
+          <span
+            onClick={handleResendOtp}
+            className="text-[#22A59A] cursor-pointer ml-2 font-medium"
+          >
+            {t("resend")}
+          </span>
         </p>
       </div>
     </div>

@@ -9,14 +9,16 @@ import {
 import { getRandomColor } from "@/utils";
 import Loading from "@/Components/shared/Loading";
 import FileFrame from "@/Components/shared/FileFrame";
+import { useTranslation } from "react-i18next";
 
 const FilesPage = () => {
+  const { t } = useTranslation();
+
   const { data, isLoading } = useGetToolCategoriesQuery();
   const [activeCategory, setActiveCategory] = useState(null);
 
   const [params, setParams] = useState(null);
 
-  // Set params when data is ready
   useEffect(() => {
     if (data?.tools?.[0]?._id) {
       setParams({
@@ -73,17 +75,17 @@ const FilesPage = () => {
 
   return (
     <div className="container mx-auto text-white">
-      <p className="text-center text-4xl font-bold pt-10">Files</p>
-      <p className="text-center mt-2">Home/Files</p>
+      <p className="text-center text-4xl font-bold pt-10">{t("filesTitle")}</p>
+      <p className="text-center mt-2">{t("breadcrumbHomeFiles")}</p>
 
-      <div className="w-full  mx-auto mt-20">
-        <h2 className="text-2xl font-medium pb-5">Category</h2>
+      <div className="w-full mx-auto mt-20">
+        <h2 className="text-2xl font-medium pb-5">{t("categoryTitle")}</h2>
         <Slider {...settings}>
           {data?.tools?.map((item, index) => (
             <div key={index} className="px-2">
               <div
                 className={`group h-40 flex flex-col ${
-                  activeCategory == item?._id && "border-2"
+                  activeCategory == item?._id ? "border-2" : ""
                 } items-center justify-center rounded-lg shadow-lg text-white ${getRandomColor(
                   index
                 )} cursor-pointer transition-transform transform`}
@@ -108,10 +110,8 @@ const FilesPage = () => {
         </Slider>
       </div>
 
-      <p className="text-center text-xl font-semibold mt-10">
-        Emotional Wellbeing
-      </p>
-      <p className="mt-20">Showing {fileData?.files?.length || 0} result</p>
+      <p className="text-center text-xl font-semibold mt-10">{t("emotionalWellbeing")}</p>
+      <p className="mt-20">{t("showingResults", { count: fileData?.files?.length || 0 })}</p>
       <div>
         <FileFrame files={fileData?.files} />
       </div>

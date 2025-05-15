@@ -2,8 +2,10 @@ import React from "react";
 import { useGetReferralHistoryQuery } from "@/redux/features/auth/dashboardApi";
 import Loading from "../shared/Loading";
 import moment from "moment";
+import { useTranslation } from "react-i18next";
 
 const RefferralHistory = () => {
+  const { t } = useTranslation();
   const { data, isLoading } = useGetReferralHistoryQuery();
 
   if (isLoading) {
@@ -14,7 +16,7 @@ const RefferralHistory = () => {
 
   return (
     <div className="p-4">
-      <p className="text-xl font-semibold mb-8 text-white">Referral History</p>
+      <p className="text-xl font-semibold mb-8 text-white">{t("referralHistoryTitle")}</p>
 
       {referrals.length > 0 ? (
         referrals.map((user, index) => (
@@ -42,14 +44,14 @@ const RefferralHistory = () => {
                   user.active ? "text-green-500" : "text-red-500"
                 }`}
               >
-                Status: {user.active ? "Active" : "Inactive"}
+                {t("statusLabel")}: {user.active ? t("activeStatus") : t("inactiveStatus")}
               </p>
             </div>
           </div>
         ))
       ) : (
         <div className="text-gray-400 text-center py-10">
-          No referral history found.
+          {t("noReferralHistoryFound")}
         </div>
       )}
     </div>

@@ -2,8 +2,10 @@ import Loading from "@/Components/shared/Loading";
 import { useGetNotificationsQuery } from "@/redux/features/auth/dashboardApi";
 import React from "react";
 import moment from "moment";
+import { useTranslation } from "react-i18next";
 
 const Notification = () => {
+  const { t } = useTranslation();
   const { data, isLoading } = useGetNotificationsQuery({});
 
   if (isLoading) {
@@ -14,8 +16,8 @@ const Notification = () => {
 
   return (
     <div className="text-white container mx-auto pb-5">
-      <p className="text-center text-4xl font-semibold pt-10">Notifications</p>
-      <p className="text-center mt-2 mb-20">Home / Notification</p>
+      <p className="text-center text-4xl font-semibold pt-10">{t("notificationsTitle")}</p>
+      <p className="text-center mt-2 mb-20">{t("breadcrumbHomeNotification")}</p>
 
       {notifications.length > 0 ? (
         <div className="space-y-4">
@@ -38,7 +40,7 @@ const Notification = () => {
         </div>
       ) : (
         <div className="text-center text-slate-500 py-10">
-          <p>You have no notifications</p>
+          <p>{t("noNotifications")}</p>
         </div>
       )}
     </div>

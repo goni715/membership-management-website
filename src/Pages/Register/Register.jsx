@@ -6,8 +6,11 @@ import { useForm, Controller } from "react-hook-form";
 import { useRegisterMutation } from "@/redux/features/auth/authApi";
 import toast from "react-hot-toast";
 import Loading from "@/Components/shared/Loading";
+import { useTranslation } from "react-i18next";
 
 const Register = () => {
+  const { t } = useTranslation();
+
   const {
     control,
     handleSubmit,
@@ -15,7 +18,6 @@ const Register = () => {
     formState: { errors, isSubmitting },
   } = useForm();
 
-  // This function will be called on form submit
   const navigate = useNavigate();
 
   const [registerFn] = useRegisterMutation();
@@ -28,7 +30,7 @@ const Register = () => {
           navigate("/verify-otp", { state: { email: data?.email } });
           toast(res?.message);
         }
-        //! remove it: after checking OTP
+        // Remove this after OTP flow is checked
         console.log(res);
       })
       .catch((error) => {
@@ -50,35 +52,35 @@ const Register = () => {
       >
         <div className=" text-white bg-black opacity-75 p-10 px-16 rounded-2xl shadow-2xl">
           <p className="text-center text-[32px] text-white">
-            Welcome to AVANTRA!
+            {t("welcomeToAvantra")}
           </p>
-          <p className="mb-8 text-center">Please sign up to continue access.</p>
+          <p className="mb-8 text-center">{t("pleaseSignUpToContinue")}</p>
 
-          {/* Ant Design Form */}
           <Form layout="vertical" onFinish={handleSubmit(onSubmit)}>
-            {/* User Name */}
-            <Form.Item label={<p className="text-white">Full Name</p>}>
+            <Form.Item label={<p className="text-white">{t("fullName")}</p>}>
               <Controller
                 name="name"
                 control={control}
-                rules={{ required: "Name is required" }}
+                rules={{ required: t("nameIsRequired") }}
                 render={({ field }) => (
-                  <Input {...field} size="large" placeholder="Type here" />
+                  <Input {...field} size="large" placeholder={t("typeHere")} />
                 )}
               />
-              {errors.username && (
-                <p className="text-red-500">{errors.username.message}</p>
+              {errors.name && (
+                <p className="text-red-500">{errors.name.message}</p>
               )}
             </Form.Item>
 
-            {/* Email Address */}
-            <Form.Item label={<p className="text-white">Email Address</p>}>
+            <Form.Item label={<p className="text-white">{t("emailAddress")}</p>}>
               <Controller
                 name="email"
                 control={control}
                 rules={{
-                  required: "Email is required",
-                  pattern: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
+                  required: t("emailIsRequired"),
+                  pattern: {
+                    value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
+                    message: t("invalidEmailFormat"),
+                  },
                 }}
                 render={({ field }) => (
                   <Input
@@ -93,12 +95,11 @@ const Register = () => {
               )}
             </Form.Item>
 
-            {/* Password */}
-            <Form.Item label={<p className="text-white">Password</p>}>
+            <Form.Item label={<p className="text-white">{t("password")}</p>}>
               <Controller
                 name="password"
                 control={control}
-                rules={{ required: "Password is required" }}
+                rules={{ required: t("passwordIsRequired") }}
                 render={({ field }) => (
                   <Input.Password
                     {...field}
@@ -112,15 +113,14 @@ const Register = () => {
               )}
             </Form.Item>
 
-            {/* Confirm Password */}
-            <Form.Item label={<p className="text-white">Confirm Password</p>}>
+            <Form.Item label={<p className="text-white">{t("confirmPassword")}</p>}>
               <Controller
                 name="confirmPassword"
                 control={control}
                 rules={{
-                  required: "Confirm Password is required",
+                  required: t("confirmPasswordIsRequired"),
                   validate: (value) =>
-                    value === getValues("password") || "Passwords do not match",
+                    value === getValues("password") || t("passwordsDoNotMatch"),
                 }}
                 render={({ field }) => (
                   <Input.Password
@@ -135,28 +135,25 @@ const Register = () => {
               )}
             </Form.Item>
 
-            {/* Avantra Referral Code */}
-            <Form.Item
-              label={<p className="text-white">Avantra Referral Code</p>}
-            >
+            <Form.Item label={<p className="text-white">{t("avantraReferralCode")}</p>}>
               <Controller
                 name="referralCode"
                 control={control}
                 render={({ field }) => (
-                  <Input {...field} size="large" placeholder="Code here" />
+                  <Input {...field} size="large" placeholder={t("codeHere")} />
                 )}
               />
             </Form.Item>
 
             <button className="bg-[#22A59A] text-white w-full rounded-md py-2 cursor-pointer">
-              Sign Up
+              {t("signUp")}
             </button>
           </Form>
 
           <p className="text-center mt-5">
-            Already have an account?{" "}
+            {t("alreadyHaveAccount")}{" "}
             <Link to={"/login"} className="text-[#22A59A]">
-              Sign in
+              {t("signIn")}
             </Link>
           </p>
         </div>

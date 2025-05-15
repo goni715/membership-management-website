@@ -4,8 +4,11 @@ import { Controller, useForm } from "react-hook-form";
 import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
 import { useChangePasswordMutation } from "@/redux/features/auth/authApi";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 
 const ChangePassword = ({ setChangeRoute }) => {
+  const { t } = useTranslation();
+
   const {
     control,
     handleSubmit,
@@ -48,16 +51,16 @@ const ChangePassword = ({ setChangeRoute }) => {
 
   return (
     <div className="p-4">
-      <p className="text-xl font-bold">Change Password</p>
+      <p className="text-xl font-bold">{t("changePasswordTitle")}</p>
       <div className="px-20 mt-10">
         <Form layout="vertical" onFinish={handleSubmit(onSubmit)}>
           {/* Current Password */}
-          <Form.Item label={<p className="text-white">Current Password</p>}>
+          <Form.Item label={<p className="text-white">{t("currentPasswordLabel")}</p>}>
             <div className="relative">
               <Controller
                 name="old_password"
                 control={control}
-                rules={{ required: "Current password is required" }}
+                rules={{ required: t("currentPasswordRequired") }}
                 render={({ field }) => (
                   <Input
                     {...field}
@@ -78,18 +81,18 @@ const ChangePassword = ({ setChangeRoute }) => {
                 )}
               </span>
             </div>
-            {errors.currentPassword && (
-              <p className="text-red-500">{errors.currentPassword.message}</p>
+            {errors.old_password && (
+              <p className="text-red-500">{errors.old_password.message}</p>
             )}
           </Form.Item>
 
           {/* New Password */}
-          <Form.Item label={<p className="text-white">New Password</p>}>
+          <Form.Item label={<p className="text-white">{t("newPasswordLabel")}</p>}>
             <div className="relative">
               <Controller
                 name="new_password"
                 control={control}
-                rules={{ required: "New password is required" }}
+                rules={{ required: t("newPasswordRequired") }}
                 render={({ field }) => (
                   <Input
                     {...field}
@@ -106,22 +109,21 @@ const ChangePassword = ({ setChangeRoute }) => {
                 {showNewPassword ? <EyeInvisibleOutlined /> : <EyeOutlined />}
               </span>
             </div>
-            {errors.newPassword && (
-              <p className="text-red-500">{errors.newPassword.message}</p>
+            {errors.new_password && (
+              <p className="text-red-500">{errors.new_password.message}</p>
             )}
           </Form.Item>
 
           {/* Confirm Password */}
-          <Form.Item label={<p className="text-white">Confirm Password</p>}>
+          <Form.Item label={<p className="text-white">{t("confirmPasswordLabel")}</p>}>
             <div className="relative">
               <Controller
                 name="confirmPassword"
                 control={control}
                 rules={{
-                  required: "Confirm password is required",
+                  required: t("confirmPasswordRequired"),
                   validate: (value) =>
-                    value === getValues("new_password") ||
-                    "Passwords do not match",
+                    value === getValues("new_password") || t("passwordsDoNotMatch"),
                 }}
                 render={({ field }) => (
                   <Input
@@ -149,11 +151,8 @@ const ChangePassword = ({ setChangeRoute }) => {
           </Form.Item>
 
           <div className="flex justify-center pb-10">
-            <button
-              className="bg-[#22A59A] text-white p-2 rounded-sm"
-              type="submit"
-            >
-              Change Password
+            <button className="bg-[#22A59A] text-white p-2 rounded-sm" type="submit">
+              {t("changePasswordButton")}
             </button>
           </div>
         </Form>
