@@ -6,12 +6,13 @@ import path from "path";
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
 // https://vite.dev/config/
+
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  build: {
-    outDir: "dist",
-  },
-  base: "/",
+  // build: {
+  //   outDir: "dist",
+  // },
+  // base: "/",
   resolve: {
     alias: {
       // eslint-disable-next-line no-undef
