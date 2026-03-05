@@ -5,6 +5,8 @@ import StepEarn from "../../Components/StepEarn/StepEarn";
 import DownloadApp from "../../Components/DownloadApp/DownloadApp";
 
 const HomePage = () => {
+ 
+
   return (
     <div className="bg-[#090909]">
       <div className="container mx-auto">

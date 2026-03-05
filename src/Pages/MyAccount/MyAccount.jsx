@@ -63,7 +63,8 @@ const MyAccount = () => {
                 changeRoute === "wallet" && "bg-[#22A59A]"
               } w-full p-1 px-5 rounded-sm shadow-2xl flex items-center justify-between cursor-pointer`}
             >
-              {t("wallet")} <MdOutlineKeyboardArrowRight color="white" size={20} />
+              {t("wallet")}{" "}
+              <MdOutlineKeyboardArrowRight color="white" size={20} />
             </p>
 
             <p
