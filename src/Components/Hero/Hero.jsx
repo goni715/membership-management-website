@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import img from "../../assets/images/hero.png";
 import facebook from "../../assets/images/facebook.png";
 import whatsapp from "../../assets/images/whatsapp.png";
@@ -21,7 +22,6 @@ const Hero = () => {
   const { data: profileData } = useProfileQuery();
   const [decodedToken, setDecodedToken] = useState(null);
   const accessToken = useSelector(currentAccessToken);
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -52,48 +52,38 @@ const Hero = () => {
 
   const handleShare = (platform) => {
     const referralLink = `${window.location.origin}/register?code=${profileData?.referralCode}`;
-    const message = `Hey! Join me on this amazing platform and earn rewards with my referral code: ${profileData?.referralCode}`;
-
     switch (platform) {
       case "whatsapp":
         window.open(
           `https://wa.me/?text=${encodeURIComponent(referralLink)}`,
-          "_blank"
+          "_blank",
         );
         break;
       case "facebook":
         window.open(
-          `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-            referralLink
-          )}`,
-          "_blank"
+          `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(referralLink)}`,
+          "_blank",
         );
         break;
       case "twitter":
         window.open(
-          `https://twitter.com/intent/tweet?text=${encodeURIComponent(
-            referralLink
-          )}`,
-          "_blank"
+          `https://twitter.com/intent/tweet?text=${encodeURIComponent(referralLink)}`,
+          "_blank",
         );
         break;
       case "instagram":
-        message.warning(
-          "Instagram does not support sharing via URL. Please use the Instagram app."
-        );
+        toast.error("Instagram does not support sharing via URL. Use the app.");
         break;
       case "telegram":
         window.open(
-          `https://t.me/share/url?url=${encodeURIComponent(
-            referralLink
-          )}&text=${encodeURIComponent(referralLink)}`,
-          "_blank"
+          `https://t.me/share/url?url=${encodeURIComponent(referralLink)}&text=${encodeURIComponent(referralLink)}`,
+          "_blank",
         );
         break;
       case "messenger":
         window.open(
           `https://www.messenger.com/t/?text=${encodeURIComponent(referralLink)}`,
-          "_blank"
+          "_blank",
         );
         break;
       default:
@@ -101,56 +91,102 @@ const Hero = () => {
     }
   };
 
-  return (
-    <div className="text-white grid grid-cols-1 md:grid-cols-2 justify-between py-20 px-2 md:px-0">
-      <div>
-        <p className="text-[30px] md:text-[64px] font-bold mb-5">
-          {t("referEarnRewards")}
-        </p>
-        <p>{t("referFriendsEarnCash")}</p>
-        <p>{t("noLimitsNoHassle")}</p>
-        <div className="md:flex items-center gap-4">
-          <p>{t("shareReferralCodeThrough")}</p>
+  // Framer Motion Variants
+  const containerVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { staggerChildren: 0.2, duration: 0.8 },
+    },
+  };
 
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { type: "spring", stiffness: 100 },
+    },
+  };
+
+  const buttonVariants = {
+    hover: {
+      scale: 1.05,
+      backgroundColor: "#1f8f87",
+      transition: { duration: 0.3 },
+    },
+    tap: { scale: 0.95 },
+  };
+
+  return (
+    <motion.div
+      className="text-white grid grid-cols-1 md:grid-cols-2 justify-between py-20 px-2 md:px-0"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <div>
+        <motion.p
+          className="text-[30px] md:text-[64px] font-bold mb-5"
+          variants={itemVariants}
+        >
+          {t("referEarnRewards")}
+        </motion.p>
+        <motion.p className="mb-2" variants={itemVariants}>
+          {t("referFriendsEarnCash")}
+        </motion.p>
+        <motion.p className="mb-5" variants={itemVariants}>
+          {t("noLimitsNoHassle")}
+        </motion.p>
+
+        <motion.div
+          className="md:flex items-center gap-4"
+          variants={itemVariants}
+        >
+          <p>{t("shareReferralCodeThrough")}</p>
           <div className="flex items-center gap-1 my-5">
-            <img
-              src={facebook}
-              alt=""
-              onClick={() => handleShare("facebook")}
-            />
-            <img
-              src={whatsapp}
-              alt=""
-              onClick={() => handleShare("whatsapp")}
-            />
-            <img
-              src={instagram}
-              alt=""
-              onClick={() => handleShare("instagram")}
-            />
-            <img
-              src={telegram}
-              alt=""
-              onClick={() => handleShare("telegram")}
-            />
-            <img
-              src={messenger}
-              alt=""
-              onClick={() => handleShare("messenger")}
-            />
-            <img src={twitter} alt="" onClick={() => handleShare("twitter")} />
+            {[facebook, whatsapp, instagram, telegram, messenger, twitter].map(
+              (icon, idx) => (
+                <motion.img
+                  key={idx}
+                  src={icon}
+                  alt=""
+                  whileHover={{ scale: 1.2 }}
+                  className="cursor-pointer"
+                  onClick={() =>
+                    handleShare(
+                      [
+                        "facebook",
+                        "whatsapp",
+                        "instagram",
+                        "telegram",
+                        "messenger",
+                        "twitter",
+                      ][idx],
+                    )
+                  }
+                />
+              ),
+            )}
           </div>
-        </div>
+        </motion.div>
 
         {!decodedToken ? (
-          <button
+          <motion.button
             onClick={handleReferring}
             className="bg-[#22A59A] px-5 text-white rounded-sm py-2 cursor-pointer max-h-10"
+            variants={itemVariants}
+            whileHover={buttonVariants.hover}
+            whileTap={buttonVariants.tap}
           >
             {t("startReferring")}
-          </button>
+          </motion.button>
         ) : (
-          <div className="flex items-center gap-4 rounded-md">
+          <motion.div
+            className="flex items-center gap-4 rounded-md"
+            variants={itemVariants}
+          >
             <Input
               value={profileData?.referralCode}
               readOnly
@@ -165,19 +201,31 @@ const Hero = () => {
                 </button>
               }
             />
-            <button
+            <motion.button
               className="bg-[#22A59A] px-5 text-white rounded-sm py-2 cursor-pointer max-h-10"
-              onClick={() => handleShare("whatsapp")} // This could be modified to any preferred platform
+              onClick={() => handleShare("whatsapp")}
+              whileHover={buttonVariants.hover}
+              whileTap={buttonVariants.tap}
             >
               Invite Now
-            </button>
-          </div>
+            </motion.button>
+          </motion.div>
         )}
       </div>
-      <div className="mx-auto">
-        <img src={img} alt="" />
-      </div>
-    </div>
+
+      <motion.div
+        className="mx-auto"
+        variants={itemVariants}
+        initial={{ opacity: 0, x: 50 }}
+        animate={{
+          opacity: 1,
+          x: 0,
+          transition: { type: "spring", stiffness: 80, delay: 0.5 },
+        }}
+      >
+        <img src={img} alt="hero_img" className="w-full max-w-md" />
+      </motion.div>
+    </motion.div>
   );
 };
 

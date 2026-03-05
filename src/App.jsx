@@ -6,8 +6,8 @@ import Footer from "./Components/Footer/Footer";
 function App() {
   return (
     <div>
-      <NavBar />
-      <div className="min-h-[78vh] bg-[#090909]">
+      <div className="min-h-screen bg-[#090909]">
+        <NavBar />
         <Outlet />
       </div>
       <Footer />

@@ -1,16 +1,9 @@
-import { ThreeCircles } from "react-loader-spinner";
+import { Spin } from "antd";
 
 const Loader = () => {
   return (
-    <div className="flex justify-center items-center w-full h-full">
-      <ThreeCircles
-        visible={true}
-        color="#DC0083"
-        width={28}
-        ariaLabel="three-circles-loading"
-        wrapperStyle={{}}
-        wrapperClass=""
-      />
+    <div className="h-screen bg-black/10 fixed inset-0 z-[999] backdrop-blur-md flex justify-center items-center">
+      <Spin size="large" />
     </div>
   );
 };
